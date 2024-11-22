@@ -1,18 +1,19 @@
 package org.miriHershtick;
 
+import lombok.Data;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
-
-public class ApiEntity {
+@Data
+public class ApiReq {
     private final String url;
     private int statusCode;
     private String responseBody;
-    private boolean failed;
 
-    public ApiEntity(String baseUrl) {
+
+    public ApiReq(String baseUrl) {
         this.url = baseUrl;
         sendGetApiRequest();
     }
@@ -31,33 +32,8 @@ public class ApiEntity {
             this.statusCode = response.statusCode();
             this.responseBody = response.body();
         } catch (Exception e) {
-            failed=true;
             System.out.println(e.getMessage());
         }
-    }
-
-    public boolean isFailed() {
-        return failed;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public String getResponseBody() {
-        return responseBody;
-    }
-
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public void setResponseBody(String responseBody) {
-        this.responseBody = responseBody;
     }
 
     @Override
