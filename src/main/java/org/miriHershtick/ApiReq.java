@@ -27,8 +27,6 @@ public class ApiReq {
 
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("Response Code: " + response.statusCode());
-            System.out.println("Response Body: " + response.body());
             this.statusCode = response.statusCode();
             this.responseBody = response.body();
         } catch (Exception e) {
